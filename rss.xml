@@ -10,9 +10,18 @@
         </author>
         <description>Keep My web simply And Stupid</description>
         <language>zh-cn</language>
-        <pubDate>Fri, 31 Jan 2025 21:11:20 +0800</pubDate>
-        <lastBuildDate>Fri, 31 Jan 2025 21:11:20 +0800</lastBuildDate>
+        <pubDate>Sun, 02 Mar 2025 09:50:00 +0800</pubDate>
+        <lastBuildDate>Sun, 02 Mar 2025 09:50:00 +0800</lastBuildDate>
         <category term="hello!" />
+        <item>
+            <guid isPermalink="true">http://example.com/2025/03/02/New/</guid>
+            <title>New</title>
+            <link>http://example.com/2025/03/02/New/</link>
+            <pubDate>Sun, 02 Mar 2025 09:50:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h1 id=&#34;更新遗下我的配置文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#更新遗下我的配置文件&#34;&gt;#&lt;/a&gt; 更新遗下我的配置文件&lt;/h1&gt;
+&lt;h2 id=&#34;githubhttpsgithubcomjorryolinedotfiles&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#githubhttpsgithubcomjorryolinedotfiles&#34;&gt;#&lt;/a&gt; github：&lt;a href=&#34;https://github.com/JorryOline/Dotfiles&#34;&gt;https://github.com/JorryOline/Dotfiles&lt;/a&gt;&lt;/h2&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">http://example.com/2025/01/31/hello-world/</guid>
             <title>Hello World</title>

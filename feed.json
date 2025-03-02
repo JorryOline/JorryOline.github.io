@@ -7,6 +7,14 @@
     "home_page_url": "http://example.com",
     "items": [
         {
+            "id": "http://example.com/2025/03/02/New/",
+            "url": "http://example.com/2025/03/02/New/",
+            "title": "New",
+            "date_published": "2025-03-02T01:50:00.000Z",
+            "content_html": "<h1 id=\"更新遗下我的配置文件\"><a class=\"anchor\" href=\"#更新遗下我的配置文件\">#</a> 更新遗下我的配置文件</h1>\n<h2 id=\"githubhttpsgithubcomjorryolinedotfiles\"><a class=\"anchor\" href=\"#githubhttpsgithubcomjorryolinedotfiles\">#</a> github：<a href=\"https://github.com/JorryOline/Dotfiles\">https://github.com/JorryOline/Dotfiles</a></h2>\n",
+            "tags": []
+        },
+        {
             "id": "http://example.com/2025/01/31/hello-world/",
             "url": "http://example.com/2025/01/31/hello-world/",
             "title": "Hello World",
