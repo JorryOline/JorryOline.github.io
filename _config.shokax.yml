@@ -1,0 +1,250 @@
+# ==============================================
+# ShokaX 主题配置(从线上站点还原)
+# 主题版本: hexo-theme-shokaX v0.4.17 / Hexo 7.3.0
+# 标注 [提速] 的项是本次为加快访问速度所做的改动
+# ==============================================
+
+alternate: JorryJo                 # 站点大标题(左上角色块)
+
+statics: "/"
+assets: "assets"
+css: "css"
+js: "js"
+
+open_graph:
+
+grayMode: false
+
+pwa:
+  enable: false
+  serviceworker: sw.js
+  manifest: manifest.json
+
+experiments:
+  debug: false
+  disableThemeComment: false
+  usingRelative: false
+  optimizeLongPosts: true          # [提速] 长文章(Windows Terminal 那篇)FPS 优化
+  mobileWidth: 820px
+  cloudflarePatch: false
+  coverConfig:
+    enableCover: true
+    enablePreload: true
+    enableNextGradientCover: false  # 上/下一页封面沿用原配置(用随机图)
+  copyrightLength: 50
+
+homeConfig:
+  gradient: false
+  fixedCover: "assets/5.jpg"        # [提速] 原为 assets/5.png —— 9.5MB PNG,全站每页都要预加载它
+                                   # 已压缩为同名目录下的 5.jpg(见 source/assets/)
+
+modules:
+  player: false                    # [提速] 未配置 audio 歌单,关闭音乐播放器模块
+  fireworks: true
+  unlazyHash: false
+  visibilityListener: false        # [提速] 未使用,关闭
+  tabs: false                      # [提速] 未使用选项卡扩展,关闭
+  quiz: false                      # [提速] 未使用题目扩展,关闭
+  fancybox: true
+
+performance:
+  preConnect:
+    - "https://s4.zstatic.net"
+    - "https://at.alicdn.com"
+  dnsPrefetch:
+
+playerAPI: "https://api.injahow.cn"
+
+icon:
+  favicon: "/favicon.ico"            # 实际输出 /assets/favicon.ico
+  apple_touch_icon: "/apple-touch-icon.png"
+
+seo:
+  bing:
+  google:
+  yandex:
+  baidu:
+
+visitor:
+  clarity: false
+  baiduAnalytics: false
+  googleAnalytics: false
+
+darkmode: true
+auto_dark:
+  enable: true
+  start: 20
+  end: 7
+
+auto_scroll: false
+
+loader:
+  start: true
+  switch: false
+
+polyfill:
+  enable: false
+  features:
+    - default
+    - fetch
+
+fireworks:
+  enable: true
+  options:
+    excludeElements: ["a"]
+    particles:
+      - shape: circle
+        move: ["emit"]
+        easing: easeOutExpo
+        colors:
+          - "rgba(255,182,185,.9)"
+          - "rgba(250,227,217,.9)"
+          - "rgba(187,222,214,.9)"
+          - "rgba(138,198,209,.9)"
+        number: 30
+        duration: [1200, 1800]
+        shapeOptions:
+          radius: [16, 32]
+      - shape: circle
+        move: ["diffuse"]
+        easing: easeOutExpo
+        colors: ["#fff"]
+        number: 1
+        duration: [1200, 1800]
+        shapeOptions:
+          radius: 20
+          alpha: 0.5
+          lineWidth: 6
+
+font:
+  enable: true
+  loadFromGoogle: false           # [提速] 原为 true:每个页面都要请求 fonts.googleapis.com
+                                  # 国内基本连不上,会白等好几秒才渲染文字
+  global:
+    external: false              # [提速] 改用系统字体栈
+    family: "Mulish, -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif"
+    size:
+  logo:
+    external: false
+    family: "'Fredericka the Great', 'STKaiti', 'KaiTi', serif"
+    size: 3.5
+  title:
+    external: false
+    family: "'Noto Serif JP', 'Songti SC', 'SimSun', serif"
+    size: 2.5
+  headings:
+    external: false
+    family: "'Noto Serif SC', 'Songti SC', 'Microsoft YaHei', sans-serif"
+    size:
+  posts:
+    external: false
+    family:
+  codes:
+    external: false
+    family: "Inconsolata, Consolas, Monaco, monospace"
+
+iconfont: "4415496_59g1326wajd"
+
+menu:
+  home: / || home
+
+# 评论:原文没有可用的 waline 后端(线上 waline 的 serverURL 为空,评论加载失败),
+# 但主题仍会加载 186KB 的 waline JS + 两份 CSS,所以直接关掉
+twikoo:
+  enable: false
+  mode: vercel
+  envId: "https://example.com"
+  region:
+
+waline:
+  enable: false                   # [提速] 详见上面说明;有后端时填 serverURL 再改回 true
+  serverURL: ""
+  lang: "zh-CN"
+  locale: {}
+  emoji:
+    - https://unpkg.com/@waline/emojis@1.0.1/weibo
+  meta:
+    - nick
+    - mail
+    - link
+  requiredMeta:
+    - nick
+    - mail
+  wordLimit: 0
+  pageSize: 10
+  pageview: false
+
+summary:
+  enable: false
+  introduce: "我是基于ChatGPT-turbo-3.5实现的AI助手，在此网站上负责整理和概括文章"
+  mode: openai
+  pricing: "trial"
+  openai:
+    remote: "https://api.openai.com"
+    apikey: "key"
+
+social:
+  github: https://github.com/JorryOline || github || "#191717"
+  music: https://music.163.com/#/user/home?id=1765520452 || cloud-music || "#e60026"
+  email: 19022172890 || envelope || "#55acd5"
+
+sidebar:
+  position: left
+  avatar: avatar.jpg
+
+widgets:
+  random_posts: true
+  recent_comments: true
+
+footer:
+  since: 2022
+  icon:
+    name: sakura rotate
+    color: "#ffc0cb"
+  count: true
+  powered: true
+  lantern:
+    enable: false                 # 原站未见中秋灯笼,关闭
+  icp:
+    enable: false
+
+post:
+  count: true
+
+outime:
+  enable: false
+  days: 90
+
+reward:
+  enable: true
+  account:
+    # [修复] 线上 /assets/wechatpay.png 是 404(仓库里根本没这个文件),
+    # 已移除微信收款码占位;补一张 wechatpay.png 到 source/assets/ 后把下面这行注释打开即可
+    # wechatpay: /wechatpay.png
+    alipay: /alipay.png
+
+tagcloud:
+  min: 16
+  max: 22
+  start: "#72cecf"
+  end: "#ffbac3"
+  amount: 200
+
+creative_commons:
+  license: by-nc-sa
+  language: deed.zh
+
+audio:
+
+image_server:
+
+search:
+  hits:
+    per_page: 10
+
+pangu: false
+
+quicklink:
+  timeout: 3000
+  priority: true
+  ignores:

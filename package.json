@@ -1,0 +1,30 @@
+{
+  "name": "jorryjo-blog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "JorryJo 的个人博客 (Hexo + ShokaX)，从线上静态站点还原",
+  "scripts": {
+    "build": "hexo generate",
+    "clean": "hexo clean",
+    "server": "hexo server",
+    "deploy": "hexo deploy"
+  },
+  "hexo": {
+    "version": "7.3.0"
+  },
+  "dependencies": {
+    "hexo": "7.3.0",
+    "hexo-generator-archive": "^2.0.0",
+    "hexo-generator-category": "^2.0.0",
+    "hexo-generator-index": "^3.0.0",
+    "hexo-generator-tag": "^2.0.0",
+    "hexo-renderer-ejs": "^2.0.0",
+    "hexo-renderer-multi-next-markdown-it": "^0.2.1",
+    "hexo-renderer-stylus": "^3.0.1",
+    "hexo-deployer-git": "^4.0.0",
+    "hexo-server": "^3.0.0"
+  },
+  "devDependencies": {
+    "hexo-cli": "^4.3.2"
+  }
+}

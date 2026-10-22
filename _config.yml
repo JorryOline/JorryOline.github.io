@@ -1,0 +1,104 @@
+# ==============================================
+# Hexo 站点配置
+# 来源: 从线上 https://jorryoline.github.io 的静态产物还原
+# 原配置 url 为 http://example.com(hexo 默认值,未修改),这里已修正为真实域名
+# ==============================================
+
+# Site
+title: My Little website!
+subtitle: Hello!
+description: Keep My web simply And Stupid
+keywords: hello!
+author: JorryJo
+language: zh-cn
+timezone: Asia/Shanghai
+
+# URL
+## 原来是 http://example.com，会导致 canonical / feed 链接全是 example.com
+url: https://jorryoline.github.io
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+# 关键: 置空 syntax_highlighter,否则 hexo 7 的 backtick_code_block 前置过滤器会在
+# markdown 渲染前就把 ``` 代码块截走,改成 hexo 自带高亮(shokaX 的 Prism 行号就丢了)
+syntax_highlighter:
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: mtime
+
+# Pagination
+per_page: 10
+pagination_dir: page
+
+# Extensions
+theme: shokax
+
+# feed: 生成 atom.xml / rss.xml / feed.json(线上原本就有这三个文件)
+feed:
+  limit: 20
+  order_by: -date
+  tag_dir: false            # 线上只有根目录下的三个 feed,不生成按标签/分类拆分的
+  category_dir: false
+
+# Deployment —— 线上仓库是 JorryOline/JorryOline.github.io，Pages 来源为 master 分支
+deploy:
+  type: git
+  repo: https://github.com/JorryOline/JorryOline.github.io.git
+  branch: master
+  message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }}"
+
+# markdown 渲染器配置(hexo-renderer-multi-next-markdown-it)
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true          # 原文大量使用行内换行 <br>
+    langPrefix: 'language-'
+    linkify: true
+    typographer: false    # 原文的引号是直引号,开 typographer 会把 " 变成 “ ”
+  plugins:
+    - plugin:
+        name: markdown-it-toc-and-anchor
+        enable: true
+        options:
+          anchorClassName: anchor   # 主题 JS 与 CSS 都按 a.anchor 找标题锚点
+          tocClassName: toc
+          tocFirstLevel: 2
+          tocLastLevel: 3
+    - plugin:
+        name: markdown-it-container
+        enable: true
