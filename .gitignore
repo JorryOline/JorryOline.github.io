@@ -5,3 +5,4 @@ db.json
 *.log
 .DS_Store
 themes/*/node_modules/
+shokaxTemp/
