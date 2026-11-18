@@ -44,6 +44,27 @@ npx hexo deploy                      # 推到 JorryOline/JorryOline.github.io �
 1. 首页头图 9.5MB PNG → 压缩后的 JPEG（**这是访问慢的主因**）
 2. 去掉 Google Fonts 外链，改用系统字体栈
 3. 关掉没有后端的 waline 评论（省 186KB JS + 2 个 CSS）
-4. 关掉没用到的主题模块（音乐播放器 / 选项卡 / 题目 / 可见度监听）
+4. 关掉没用到的主题模块（选项卡 / 题目 / 可见度监听）
 5. 修掉 404 的微信收款码请求
 6. `url` 从 `http://example.com` 改成真实域名（feed / canonical 终于对了）
+
+## 五、音乐播放模块（2026-11-18 加回）
+
+主题自带一套播放器（不是 APlayer），在 `_config.shokax.yml` 里两处开关：
+
+```yaml
+modules:
+  player: true          # 打开播放器模块
+playerAPI: "https://api.injahow.cn"   # Meting API，负责把歌单链接换成可播放的音频
+audio:
+  - https://music.163.com/#/playlist?id=2670875868   # 你的「喜欢的音乐」
+```
+
+- 表现：页面右下角出现 ▶ 按钮，点一下开始随机播放；页面往下滚后工具栏贴底，会出现 🎵 按钮，点开是完整面板（封面、歌词、上一首/下一首、音量、播放列表）。面板标题会变成「Now Playing...」。
+- **平铺写法**：`audio:` 下直接列多个链接（歌单/单曲/专辑/歌手都支持）会合并成一条播放列表；写成 `- title: xxx` + `list:` 才是分组标签，但分组标签依赖 `modules.tabs`，本站已关，别用分组。
+- **单曲/专辑/歌手**同样可用：`/song?id=xxx`、`/album?id=xxx`、`/artist?id=xxx`。
+- **已知限制**：Meting 走的是匿名接口，**网易云 VIP/版权曲只能试听 30–45 秒**（返回的 mp3 只有 400–700KB）。免费曲目是完整时长。介意的话有两条路：
+  1. 换成自己服务器上能直链的 mp3：把文件丢进 `source/music/`，`audio:` 里写完整 URL（如 `https://jorryoline.github.io/music/xxx.mp3`），不再经过 Meting。
+  2. 自己部署一个带 cookie 的 Meting-API（Vercel），把 `playerAPI` 换掉。
+- 想改歌单就改那个 `id=2670875868`；想少加载点数据就换成小歌单（600+ 首的列表每次首次打开会拉约 180KB JSON，之后走 localStorage 缓存）。
+

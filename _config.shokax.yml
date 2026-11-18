@@ -39,7 +39,7 @@ homeConfig:
                                    # 已压缩为同名目录下的 5.jpg(见 source/assets/)
 
 modules:
-  player: false                    # [提速] 未配置 audio 歌单,关闭音乐播放器模块
+  player: true                     # [音乐] 已配置 audio 歌单,开启音乐播放器模块
   fireworks: true
   unlazyHash: false
   visibilityListener: false        # [提速] 未使用,关闭
@@ -235,6 +235,10 @@ creative_commons:
   language: deed.zh
 
 audio:
+  # [音乐] 播放列表:直接写网易云/QQ音乐的链接,主题会在浏览器端通过 playerAPI(Meting)
+  # 取歌单信息。多个条目会依次合并成一条播放列表(不加 list: 就是平铺)。
+  # 支持: /playlist?id=歌单  /song?id=单曲  /album?id=专辑  /artist?id=歌手
+  - https://music.163.com/#/playlist?id=2670875868   # JorryJoe 喜欢的音乐
 
 image_server:
 
