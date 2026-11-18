@@ -267,7 +267,7 @@ live2d:
   sayHello: false              # 进站不弹欢迎语
   primaryColor: "#e9546b"      # 气泡/菜单主题色，跟站点的粉色一致
   models:
-    - path: https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json
+    - path: /live2d/models/shizuku/shizuku.model.json
       scale: 0.16
       position: [0, 60]
       stageStyle:
