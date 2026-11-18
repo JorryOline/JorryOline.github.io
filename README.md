@@ -72,24 +72,40 @@ audio:
 
 还原时 `_config.yml` 写的是 `language: zh-cn`（小写），但主题的 `languages/` 里是 `zh-CN.yml`。Hexo 的 i18n 大小写敏感，匹配不上就掉到兜底语言，整站 UI 会变成**日文**（記事のリスト / ポスト / ホーム）。改成 `language: zh-CN` 后正常。如果你以后又看到日文标签，先查这一行。
 
-## 七、在这台机器上怎么构建（没有系统 Node）
+## 七、本机环境（2026-11-18 起：Node / npm / hexo 已装好）
 
-这台机器没装 node/npm，用的是 DSH 自带的：
+项目现在就放在 **`E:\hexo-blog`**，运行时在 **`E:\nodejs`**（便携版，不写系统盘也不要点下一步）。
+
+| 东西 | 位置 / 版本 |
+| --- | --- |
+| Node.js | `E:\nodejs\node.exe`，v24.22.3 LTS |
+| npm | `E:\nodejs\npm.cmd`，11.19.1（全局目录就是 `E:\nodejs`） |
+| hexo 命令 | `E:\nodejs\hexo.cmd`（全局装的 hexo-cli 4.3.2，项目内仍是 hexo 7.3.0） |
+| npm 源 | 已设为 `https://registry.npmmirror.com` |
+
+已写入**用户 PATH**（`E:\nodejs` + `%APPDATA%\npm`），所以只要**新开一个** PowerShell / CMD / Windows Terminal 就能直接用：
 
 ```powershell
-$nodeDir = "D:\dsh\DSH NEXT\resources\runtime\x64\primary-runtime\dependencies\node\bin"
-$env:PATH = "$nodeDir;$env:PATH"          # esbuild / hexo-util 的 postinstall 会调 node，必须先加 PATH
-$pnpm = "D:\dsh\DSH NEXT\resources\runtime\x64\primary-runtime\dependencies\pnpm\bin\pnpm.mjs"
-& "$nodeDir\node.exe" $pnpm install --registry=https://registry.npmmirror.com     # 根目录与 themes/shokax 各跑一次
-& "$nodeDir\node.exe" .\node_modules\hexo-cli\bin\hexo clean
-& "$nodeDir\node.exe" .\node_modules\hexo-cli\bin\hexo generate
-& "$nodeDir\node.exe" .\node_modules\hexo-cli\bin\hexo server -p 4000
+cd E:\hexo-blog
+hexo server            # 本地预览 http://localhost:4000
+hexo clean             # 清缓存（改配置没生效时先跑这个）
+hexo generate          # 只生成到 public/
+hexo deploy            # 推到 master 上线
 ```
 
-- `pnpm install` 会因 `hexo-util postinstall: 'npm' is not recognized` 报 exit 1，**可以忽略**（它要 build 的 `highlight_alias.json` 包里自带）。同理 `ERR_PNPM_IGNORED_BUILDS` 也只是警告。
-- GitHub 直连不通，**git 走代理**：`git -c http.proxy=http://127.0.0.1:7897 push`；`hexo deploy` 靠 `$env:http_proxy/$env:https_proxy` 生效。
-- 凭证在 Windows 凭据管理器里（`git:https://JorryOline@github.com`），push 不需要手动输密码。
-- `pnpm-lock.yaml` 是这次 pnpm 装出来的，`package-lock.json` 是原来 npm 的，两个同时留着没影响。
+装依赖（一般不用重装）：
+
+```powershell
+cd E:\hexo-blog
+npm install --ignore-scripts            # 必须 --ignore-scripts
+cd themes\shokax
+npm install --ignore-scripts --legacy-peer-deps
+```
+
+- **为什么 `--ignore-scripts`**：这个依赖树里有 puppeteer（会去 Google 下载 Chrome，国内直接卡死）和 deasync（要 MSVC 编译）。跳过脚本不影响本站构建，hexo-util 需要的 `highlight_alias.json` 包内自带。
+- **为什么主题要 `--legacy-peer-deps`**：主题自带 eslint 9，而 `eslint-config-standard@17` 只认 eslint 8，npm 会报 ERESOLVE，pnpm 不管但 npm 会罢工。
+- **GitHub 直连不通**：push 要带代理 `git -c http.proxy=http://127.0.0.1:7897 push`；`hexo deploy` 先设 `$env:http_proxy` / `$env:https_proxy` 为 `http://127.0.0.1:7897`。凭证在 Windows 凭据管理器（`git:https://JorryOline@github.com`），不用输密码。
+- 旧的 `pnpm-lock.yaml` 还留着（当初是用 DSH 自带 pnpm 装的），现在以 `package-lock.json` 为准，两者共存无影响。
 
 
 
