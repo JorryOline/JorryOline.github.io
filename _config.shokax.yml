@@ -262,17 +262,17 @@ quicklink:
 live2d:
   enable: true
   script: /js/live2d/oml2d.min.js
-  dockedPosition: right        # 站在右下角
+  dockedPosition: left         # 站在左下角
   mobileDisplay: false         # 手机上不显示（会挡住内容）
   sayHello: false              # 进站不弹欢迎语
   primaryColor: "#e9546b"      # 气泡/菜单主题色，跟站点的粉色一致
   models:
     - path: /live2d/models/shizuku/shizuku.model.json
-      scale: 0.16
-      position: [0, 60]
+      scale: 0.22
+      position: [0, 0]
       stageStyle:
-        width: 300
-        height: 420
+        width: 320
+        height: 380
   tips:
     idleTips:
       interval: 30000

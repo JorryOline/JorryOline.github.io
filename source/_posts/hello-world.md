@@ -2,6 +2,7 @@
 title: "Hello World"
 date: 2025-01-31 21:11:20
 updated: 2025-02-01 11:04:43
+cover: assets/1.jpg
 ---
 # A New Website!
 
