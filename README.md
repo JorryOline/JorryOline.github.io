@@ -72,4 +72,24 @@ audio:
 
 还原时 `_config.yml` 写的是 `language: zh-cn`（小写），但主题的 `languages/` 里是 `zh-CN.yml`。Hexo 的 i18n 大小写敏感，匹配不上就掉到兜底语言，整站 UI 会变成**日文**（記事のリスト / ポスト / ホーム）。改成 `language: zh-CN` 后正常。如果你以后又看到日文标签，先查这一行。
 
+## 七、在这台机器上怎么构建（没有系统 Node）
+
+这台机器没装 node/npm，用的是 DSH 自带的：
+
+```powershell
+$nodeDir = "D:\dsh\DSH NEXT\resources\runtime\x64\primary-runtime\dependencies\node\bin"
+$env:PATH = "$nodeDir;$env:PATH"          # esbuild / hexo-util 的 postinstall 会调 node，必须先加 PATH
+$pnpm = "D:\dsh\DSH NEXT\resources\runtime\x64\primary-runtime\dependencies\pnpm\bin\pnpm.mjs"
+& "$nodeDir\node.exe" $pnpm install --registry=https://registry.npmmirror.com     # 根目录与 themes/shokax 各跑一次
+& "$nodeDir\node.exe" .\node_modules\hexo-cli\bin\hexo clean
+& "$nodeDir\node.exe" .\node_modules\hexo-cli\bin\hexo generate
+& "$nodeDir\node.exe" .\node_modules\hexo-cli\bin\hexo server -p 4000
+```
+
+- `pnpm install` 会因 `hexo-util postinstall: 'npm' is not recognized` 报 exit 1，**可以忽略**（它要 build 的 `highlight_alias.json` 包里自带）。同理 `ERR_PNPM_IGNORED_BUILDS` 也只是警告。
+- GitHub 直连不通，**git 走代理**：`git -c http.proxy=http://127.0.0.1:7897 push`；`hexo deploy` 靠 `$env:http_proxy/$env:https_proxy` 生效。
+- 凭证在 Windows 凭据管理器里（`git:https://JorryOline@github.com`），push 不需要手动输密码。
+- `pnpm-lock.yaml` 是这次 pnpm 装出来的，`package-lock.json` 是原来 npm 的，两个同时留着没影响。
+
+
 
