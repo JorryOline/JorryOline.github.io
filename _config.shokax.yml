@@ -252,3 +252,35 @@ quicklink:
   timeout: 3000
   priority: true
   ignores:
+
+# ==============================================================
+# 看板娘 Live2D（oh-my-live2d 0.19.3，脚本已自托管到 /js/live2d/oml2d.min.js）
+# 换模型：只改 models[0].path 这一行即可，其它不用动。
+# 模型库：https://www.npmjs.com/search?q=live2d-widget-model-*
+#   https://cdn.jsdelivr.net/npm/live2d-widget-model-<名字>@1.0.5/assets/<名字>.model.json
+# ==============================================================
+live2d:
+  enable: true
+  script: /js/live2d/oml2d.min.js
+  dockedPosition: right        # 站在右下角
+  mobileDisplay: false         # 手机上不显示（会挡住内容）
+  sayHello: false              # 进站不弹欢迎语
+  primaryColor: "#e9546b"      # 气泡/菜单主题色，跟站点的粉色一致
+  models:
+    - path: https://cdn.jsdelivr.net/npm/live2d-widget-model-shizuku@1.0.5/assets/shizuku.model.json
+      scale: 0.16
+      position: [0, 60]
+      stageStyle:
+        width: 300
+        height: 420
+  tips:
+    idleTips:
+      interval: 30000
+      message:
+        - 今天也要加油鸭~
+        - 点击模型可以摸摸头
+  menus:
+    disable: false             # 鼠标移到模型上出现小菜单（切换模型 / 休息一下）
+  statusBar:
+    disable: true              # 右侧竖排按钮关掉，避免和主题右下角的播放器/回到顶部打架
+

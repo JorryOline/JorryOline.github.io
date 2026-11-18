@@ -107,5 +107,18 @@ npm install --ignore-scripts --legacy-peer-deps
 - **GitHub 直连不通**：push 要带代理 `git -c http.proxy=http://127.0.0.1:7897 push`；`hexo deploy` 先设 `$env:http_proxy` / `$env:https_proxy` 为 `http://127.0.0.1:7897`。凭证在 Windows 凭据管理器（`git:https://JorryOline@github.com`），不用输密码。
 - 旧的 `pnpm-lock.yaml` 还留着（当初是用 DSH 自带 pnpm 装的），现在以 `package-lock.json` 为准，两者共存无影响。
 
+## 八、看板娘（Live2D）
 
+- 组件：**oh-my-live2d 0.19.3**，脚本自托管在 `source/js/live2d/oml2d.min.js`（约 1MB，不依赖 CDN 存活）。
+- 注入点：`themes/shokax/layout/_partials/layout.pug` 的 body 末尾，由 `if theme.live2d.enable` 包着，另加了三行 CSS（气泡贴边、手机端隐藏）。
+- 全部开关在 `_config.shokax.yml` 的 `live2d:` 块：`enable / script / dockedPosition / mobileDisplay / primaryColor / models[] / tips / menus / statusBar`。
+- **换模型只改一行**：`live2d.models[0].path`。模型地址规律：
 
+  ```text
+  https://cdn.jsdelivr.net/npm/live2d-widget-model-<名字>@1.0.5/assets/<名字>.model.json
+  ```
+
+  `<名字>` 可取：shizuku、koharu、haru、haruto、miku、unitychan、tororo、hijiki、wanko、z16、tsumiki、izumi、epsilon2_1（文件名是 `Epsilon2.1.model.json`）、chitose、nico…
+- 已验证：`hexo generate` 正常；本地 `hexo server` 打开首页，右下角出现模型，`#oml2d-stage` 300×420，鼠标移上去出现小菜单。
+- 之前自己装的 `hexo-helper-live2d` 已卸载——它会在 body 末尾再注入一套老的 `L2Dwidget`，两套同时跑会互相打架。
+- 模型预览工具在 `E:\live2d-preview\`：双击 `gallery.html` 可逐个切换看效果（不参与构建，也不在仓库里）。

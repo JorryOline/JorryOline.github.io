@@ -140,6 +140,26 @@ html(lang=page.language?page.language:config.language, style=theme.grayMode ? 'f
 
         != _js('siteInit.js')
 
+        if theme.live2d && theme.live2d.enable
+            - var l2d = Object.assign({}, theme.live2d); delete l2d.enable; delete l2d.script;
+            style.
+                #oml2d-tips { right: 0 !important; }
+                #oml2d-tips-content { max-width: 12rem; }
+                @media (max-width: 820px) { #oml2d-stage { display: none !important; } }
+            script(src=theme.live2d.script || '/js/live2d/oml2d.min.js' async)
+            script.
+                (function () {
+                    var cfg = !{JSON.stringify(l2d)};
+                    var tries = 0;
+                    (function boot() {
+                        if (window.OML2D && typeof OML2D.loadOml2d === 'function') {
+                            try { OML2D.loadOml2d(cfg); } catch (e) { console.warn('[live2d]', e); }
+                        } else if (tries++ < 100) {
+                            setTimeout(boot, 120);
+                        }
+                    })();
+                })();
+
         != shokax_inject('bodyEnd')
 
 
