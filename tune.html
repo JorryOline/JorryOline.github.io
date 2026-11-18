@@ -1,0 +1,14 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>tune</title>
+<style>html,body{margin:0;height:100%;background:#1b1b20}</style></head><body>
+<script src="/js/live2d/oml2d.min.js"></script>
+<script>
+const q = new URLSearchParams(location.search);
+const scale = Number(q.get('scale') || 0.16);
+const w = Number(q.get('w') || 300), h = Number(q.get('h') || 420);
+const dock = q.get('dock') || 'left';
+OML2D.loadOml2d({
+  models: [{ path: '/live2d/models/shizuku/shizuku.model.json', scale: scale, position: [0, 0], stageStyle: { width: w, height: h } }],
+  dockedPosition: dock, mobileDisplay: true, sayHello: false,
+  menus: { disable: true }, statusBar: { disable: true }, tips: { disable: true },
+});
+</script></body></html>
