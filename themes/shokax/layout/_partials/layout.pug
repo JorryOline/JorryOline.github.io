@@ -150,15 +150,20 @@ html(lang=page.language?page.language:config.language, style=theme.grayMode ? 'f
             script.
                 (function () {
                     var cfg = !{JSON.stringify(l2d)};
-                    var tries = 0;
-                    (function boot() {
-                        if (window.OML2D && typeof OML2D.loadOml2d === 'function') {
-                            try { OML2D.loadOml2d(cfg); } catch (e) { console.warn('[live2d]', e); }
-                        } else if (tries++ < 100) {
-                            setTimeout(boot, 120);
-                        }
+                    var done = false;
+                    function init() {
+                        if (done || !window.OML2D || typeof OML2D.loadOml2d !== 'function') return;
+                        done = true;
+                        try { OML2D.loadOml2d(cfg); } catch (e) { console.warn('[live2d]', e); }
+                    }
+                    window.__initLive2D = init;
+                    var n = 0;
+                    (function poll() {
+                        init();
+                        if (!done && n++ < 1500) setTimeout(poll, 200);
                     })();
                 })();
+            script(src=theme.live2d.script || '/js/live2d/oml2d.min.js' async onload='window.__initLive2D && window.__initLive2D()')
 
         != shokax_inject('bodyEnd')
 
