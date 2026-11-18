@@ -68,3 +68,8 @@ audio:
   2. 自己部署一个带 cookie 的 Meting-API（Vercel），把 `playerAPI` 换掉。
 - 想改歌单就改那个 `id=2670875868`；想少加载点数据就换成小歌单（600+ 首的列表每次首次打开会拉约 180KB JSON，之后走 localStorage 缓存）。
 
+## 六、顺手修的一个坑：界面语言变回中文
+
+还原时 `_config.yml` 写的是 `language: zh-cn`（小写），但主题的 `languages/` 里是 `zh-CN.yml`。Hexo 的 i18n 大小写敏感，匹配不上就掉到兜底语言，整站 UI 会变成**日文**（記事のリスト / ポスト / ホーム）。改成 `language: zh-CN` 后正常。如果你以后又看到日文标签，先查这一行。
+
+
